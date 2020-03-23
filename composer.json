@@ -16,7 +16,5 @@
         "psr-4": {
             "EdsonAlvesan\\DigiSac\\": "src/"
         }
-    },
-  "minimum-stability": "dev",
-  "prefer-stable": true
+    }
 }
