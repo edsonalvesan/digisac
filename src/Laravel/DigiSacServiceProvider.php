@@ -64,7 +64,7 @@ class DigiSacServiceProvider extends ServiceProvider
     }
 
     /**
-     * Initialize Telegram Bot SDK Library with Default Config.
+     * Initialize DigiSac Bot SDK Library with Default Config.
      *
      * @param Application $app
      */

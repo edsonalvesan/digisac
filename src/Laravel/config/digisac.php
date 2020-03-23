@@ -43,7 +43,7 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Register Telegram Commands [Optional]
+    | Register DigiSac Commands [Optional]
     |--------------------------------------------------------------------------
     |
     | If you'd like to use the SDK's built in command handler system,

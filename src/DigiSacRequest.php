@@ -7,7 +7,7 @@ use EdsonAlvesan\DigiSac\Exceptions\DigiSacSDKException;
 /**
  * Class DigiSacRequest.
  *
- * Builds Telegram Bot API Request Entity.
+ * Builds DigiSac Bot API Request Entity.
  */
 class DigiSacRequest
 {
@@ -42,7 +42,7 @@ class DigiSacRequest
     protected $files = [];
 
     /**
-     * Indicates if the request to Telegram will be asynchronous (non-blocking).
+     * Indicates if the request to DigiSac will be asynchronous (non-blocking).
      *
      * @var bool
      */
@@ -96,7 +96,7 @@ class DigiSacRequest
      *
      * @param string
      *
-     * @return TelegramRequest
+     * @return DigiSacRequest
      */
     public function setAccessToken($accessToken)
     {
@@ -173,7 +173,7 @@ class DigiSacRequest
      *
      * @param string $endpoint
      *
-     * @return TelegramRequest
+     * @return DigiSacRequest
      */
     public function setEndpoint($endpoint)
     {
@@ -197,7 +197,7 @@ class DigiSacRequest
      *
      * @param array $params
      *
-     * @return TelegramRequest
+     * @return DigiSacRequest
      */
     public function setParams(array $params = [])
     {
@@ -221,7 +221,7 @@ class DigiSacRequest
      *
      * @param array $headers
      *
-     * @return TelegramRequest
+     * @return DigiSacRequest
      */
     public function setHeaders(array $headers)
     {
@@ -247,7 +247,7 @@ class DigiSacRequest
      *
      * @param $isAsyncRequest
      *
-     * @return TelegramRequest
+     * @return DigiSacRequest
      */
     public function setAsyncRequest($isAsyncRequest)
     {
@@ -288,7 +288,7 @@ class DigiSacRequest
     public function getDefaultHeaders()
     {
         return [
-            'User-Agent' => 'Telegram Bot PHP SDK v'.Api::VERSION.' - (https://github.com/irazasyed/telegram-bot-sdk)',
+            'User-Agent' => 'DigiSac Bot PHP SDK v'.Api::VERSION.' - (https://github.com/edsonalvesan/digisac)',
         ];
     }
 

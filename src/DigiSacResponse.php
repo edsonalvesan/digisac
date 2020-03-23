@@ -4,13 +4,13 @@ namespace EdsonAlvesan\DigiSac;
 
 use GuzzleHttp\Promise\PromiseInterface;
 use Psr\Http\Message\ResponseInterface;
-use EdsonAlvesan\DigiSac\Exceptions\TelegramResponseException;
-use EdsonAlvesan\DigiSac\Exceptions\TelegramSDKException;
+use EdsonAlvesan\DigiSac\Exceptions\DigiSacResponseException;
+use EdsonAlvesan\DigiSac\Exceptions\DigiSacSDKException;
 
 /**
  * Class DigiSacResponse
  *
- * Handles the response from Telegram API.
+ * Handles the response from DigiSac API.
  */
 class DigiSacResponse
 {
@@ -40,19 +40,19 @@ class DigiSacResponse
     protected $endPoint;
 
     /**
-     * @var TelegramRequest The original request that returned this response.
+     * @var DigiSacRequest The original request that returned this response.
      */
     protected $request;
 
     /**
-     * @var TelegramSDKException The exception thrown by this request.
+     * @var DigiSacSDKException The exception thrown by this request.
      */
     protected $thrownException;
 
     /**
      * Gets the relevant data from the Http client.
      *
-     * @param TelegramRequest                    $request
+     * @param DigiSacRequest                    $request
      * @param ResponseInterface|PromiseInterface $response
      */
     public function __construct(DigiSacRequest $request, $response)
@@ -78,7 +78,7 @@ class DigiSacResponse
     /**
      * Return the original request that returned this response.
      *
-     * @return TelegramRequest
+     * @return DigiSacRequest
      */
     public function getRequest()
     {
@@ -159,7 +159,7 @@ class DigiSacResponse
     /**
      * Throws the exception.
      *
-     * @throws TelegramSDKException
+     * @throws DigiSacSDKException
      */
     public function throwException()
     {
@@ -171,13 +171,13 @@ class DigiSacResponse
      */
     public function makeException()
     {
-        $this->thrownException = TelegramResponseException::create($this);
+        $this->thrownException = DigiSacResponseException::create($this);
     }
 
     /**
      * Returns the exception that was thrown for this request.
      *
-     * @return TelegramSDKException
+     * @return DigiSacSDKException
      */
     public function getThrownException()
     {

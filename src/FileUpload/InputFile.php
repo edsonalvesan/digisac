@@ -25,7 +25,7 @@ class InputFile
      *
      * @param string $filePath
      *
-     * @throws TelegramSDKException
+     * @throws DigiSacSDKException
      */
     public function __construct($filePath)
     {
@@ -45,7 +45,7 @@ class InputFile
     /**
      * Opens file stream.
      *
-     * @throws TelegramSDKException
+     * @throws DigiSacSDKException
      *
      * @return resource
      */

@@ -6,50 +6,25 @@ use EdsonAlvesan\DigiSac\Api;
 use EdsonAlvesan\DigiSac\Exceptions\DigiSacSDKException;
 use EdsonAlvesan\DigiSac\Objects\Update;
 
-/**
- * Class CommandBus.
- */
+
 class CommandBus
 {
-    /**
-     * @var Command[] Holds all commands.
-     */
+  
     protected $commands = [];
 
-    /**
-     * @var Api
-     */
-    private $telegram;
+    private $digisac;
 
-    /**
-     * Instantiate Command Bus.
-     *
-     * @param Api $telegram
-     *
-     * @throws TelegramSDKException
-     */
-    public function __construct(Api $telegram)
+    public function __construct(Api $digisac)
     {
-        $this->telegram = $telegram;
+        $this->digisac = $digisac;
     }
 
-    /**
-     * Returns the list of commands.
-     *
-     * @return array
-     */
+
     public function getCommands()
     {
         return $this->commands;
     }
 
-    /**
-     * Add a list of commands.
-     *
-     * @param array $commands
-     *
-     * @return CommandBus
-     */
     public function addCommands(array $commands)
     {
         foreach ($commands as $command) {
@@ -59,15 +34,7 @@ class CommandBus
         return $this;
     }
 
-    /**
-     * Add a command to the commands list.
-     *
-     * @param CommandInterface|string $command Either an object or full path to the command class.
-     *
-     * @throws DigiSacSDKException
-     *
-     * @return CommandBus
-     */
+
     public function addCommand($command)
     {
         if (!is_object($command)) {
@@ -80,7 +47,7 @@ class CommandBus
                 );
             }
 
-            if ($this->telegram->hasContainer()) {
+            if ($this->digisac->hasContainer()) {
                 $command = $this->buildDependencyInjectedCommand($command);
             } else {
                 $command = new $command();
@@ -89,11 +56,7 @@ class CommandBus
 
         if ($command instanceof CommandInterface) {
 
-            /*
-             * At this stage we definitely have a proper command to use.
-             *
-             * @var Command $command
-             */
+      
             $this->commands[$command->getName()] = $command;
 
             return $this;
@@ -107,13 +70,7 @@ class CommandBus
         );
     }
 
-    /**
-     * Remove a command from the list.
-     *
-     * @param $name
-     *
-     * @return CommandBus
-     */
+ 
     public function removeCommand($name)
     {
         unset($this->commands[$name]);
@@ -121,13 +78,7 @@ class CommandBus
         return $this;
     }
 
-    /**
-     * Removes a list of commands.
-     *
-     * @param array $names
-     *
-     * @return CommandBus
-     */
+
     public function removeCommands(array $names)
     {
         foreach ($names as $name) {
@@ -137,22 +88,11 @@ class CommandBus
         return $this;
     }
 
-    /**
-     * Handles Inbound Messages and Executes Appropriate Command.
-     *
-     * @param $message
-     * @param $update
-     *
-     * @throws TelegramSDKException
-     *
-     * @return Update
-     */
     public function handler($message, Update $update)
     {
         $match = $this->parseCommand($message);
         if (!empty($match)) {
             $command = $match[1];
-//            $bot = (!empty($match[2])) ? $match[2] : '';
             $arguments = $match[3];
             $this->execute($command, $arguments, $update);
         }
@@ -160,15 +100,6 @@ class CommandBus
         return $update;
     }
 
-    /**
-     * Parse a Command for a Match.
-     *
-     * @param $text
-     *
-     * @throws \InvalidArgumentException
-     *
-     * @return array
-     */
     public function parseCommand($text)
     {
         if (trim($text) === '') {
@@ -180,15 +111,6 @@ class CommandBus
         return $matches;
     }
 
-    /**
-     * Execute the command.
-     *
-     * @param $name
-     * @param $arguments
-     * @param $message
-     *
-     * @return mixed
-     */
     public function execute($name, $arguments, $message)
     {
         if (array_key_exists($name, $this->commands)) {
@@ -200,13 +122,6 @@ class CommandBus
         return 'Ok';
     }
 
-    /**
-     * Use PHP Reflection and Laravel Container to instantiate the command with type hinted dependencies.
-     *
-     * @param $commandClass
-     *
-     * @return object
-     */
     private function buildDependencyInjectedCommand($commandClass)
     {
 
@@ -225,7 +140,7 @@ class CommandBus
         }
 
         // otherwise fetch each dependency out of the container
-        $container = $this->telegram->getContainer();
+        $container = $this->digisac->getContainer();
         $dependencies = [];
         foreach ($params as $param) {
             $dependencies[] = $container->make($param->getClass()->name);

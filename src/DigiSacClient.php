@@ -14,9 +14,12 @@ use EdsonAlvesan\DigiSac\HttpClients\HttpClientInterface;
 class DigiSacClient
 {
     /**
-     * @const string Telegram Bot API URL.
+     * @const string DigiSac Bot API URL.
      */
-    const BASE_BOT_URL = 'https://api.telegram.org/bot';
+    const BASE_API_URL_BEGIN = 'https://'; 
+    
+     const BASE_API_URL_END = '-api.digisac.app/v1';
+
 
     /**
      * @const int The timeout in seconds for a request that contains file uploads.
@@ -70,7 +73,7 @@ class DigiSacClient
      */
     public function getBaseBotUrl()
     {
-        return static::BASE_BOT_URL;
+        return static::BASE_API_URL_BEGIN;
     }
 
     /**

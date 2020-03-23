@@ -47,7 +47,7 @@ class Api
     protected $lastResponse;
 
     /**
-     * @var bool Indicates if the request to Telegram will be asynchronous (non-blocking).
+     * @var bool Indicates if the request to DigiSac will be asynchronous (non-blocking).
      */
     protected $isAsyncRequest = false;
 
@@ -100,7 +100,7 @@ class Api
             } elseif ($http_client_handler === 'guzzle') {
                 $httpClientHandler = new GuzzleHttpClient();
             } else {
-                throw new \InvalidArgumentException('The HTTP Client Handler must be set to "guzzle", or be an instance of Telegram\Bot\HttpClients\HttpClientInterface');
+                throw new \InvalidArgumentException('The HTTP Client Handler must be set to "guzzle", or be an instance of EdsonAlvesan\DigiSac\HttpClients\HttpClientInterface');
             }
         }
 
@@ -158,7 +158,7 @@ class Api
             return $this;
         }
 
-        throw new \InvalidArgumentException('The Telegram bot access token must be of type "string"');
+        throw new \InvalidArgumentException('The DigiSac bot access token must be of type "string"');
     }
 
     /**
@@ -1054,7 +1054,7 @@ class Api
         if ($action === 'get') {
             /* @noinspection PhpUndefinedFunctionInspection */
             $class_name = Str::studly(substr($method, 3));
-            $class = 'Telegram\Bot\Objects\\'.$class_name;
+            $class = 'EdsonAlvesan\DigiSac\Objects\\'.$class_name;
             $response = $this->post($method, $arguments[0] ?: []);
 
             if (class_exists($class)) {

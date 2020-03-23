@@ -4,9 +4,7 @@ namespace EdsonAlvesan\DigiSac\Exceptions;
 
 use EdsonAlvesan\DigiSac\DigiSacResponse;
 
-/**
- * Class DigiSacResponseException.
- */
+
 class DigiSacResponseException extends DigiSacSDKException
 {
     /**
@@ -36,13 +34,7 @@ class DigiSacResponseException extends DigiSacSDKException
         parent::__construct($errorMessage, $errorCode, $previousException);
     }
 
-    /**
-     * A factory for creating the appropriate exception based on the response from Telegram.
-     *
-     * @param TelegramResponse $response The response that threw the exception.
-     *
-     * @return TelegramResponseException
-     */
+
     public static function create(DigiSacResponse $response)
     {
         $data = $response->getDecodedBody();
@@ -118,7 +110,7 @@ class DigiSacResponseException extends DigiSacSDKException
     /**
      * Returns the response entity used to create the exception.
      *
-     * @return TelegramResponse
+     * @return DigiSacResponse
      */
     public function getResponse()
     {

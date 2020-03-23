@@ -2,24 +2,15 @@
 
 namespace EdsonAlvesan\DigiSac\Commands;
 
-/**
- * Class HelpCommand.
- */
+
 class HelpCommand extends Command
 {
-    /**
-     * @var string Command Name
-     */
+ 
     protected $name = 'help';
 
-    /**
-     * @var string Command Description
-     */
+
     protected $description = 'Help command, Get a list of commands';
 
-    /**
-     * {@inheritdoc}
-     */
     public function handle($arguments)
     {
         $commands = $this->telegram->getCommands();
