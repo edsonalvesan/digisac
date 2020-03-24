@@ -37,7 +37,7 @@ class DigiSacClient
     protected $httpClientHandler;
 
     /**
-     * Instantiates a new TelegramClient object.
+     * Instantiates a new DigiSacClient object.
      *
      * @param HttpClientInterface|null $httpClientHandler
      */
@@ -67,26 +67,36 @@ class DigiSacClient
     }
 
     /**
-     * Returns the base Bot URL.
+     * Returns the base URL begin.
      *
      * @return string
      */
-    public function getBaseBotUrl()
+    public function getBaseBotUrlBegin()
     {
         return static::BASE_API_URL_BEGIN;
     }
 
     /**
+     * Returns the base URL begin.
+     *
+     * @return string
+     */
+    public function getBaseBotUrlEnd()
+    {
+        return static::BASE_API_URL_END;
+    }
+
+    /**
      * Prepares the API request for sending to the client handler.
      *
-     * @param TelegramRequest $request
+     * @param DigiSacRequest $request
      *
      * @return array
      */
     public function prepareRequest(DigiSacRequest $request)
     {
-        $url = $this->getBaseBotUrl().$request->getAccessToken().'/'.$request->getEndpoint();
-
+        $url = $this->getBaseBotUrlBegin().$request->getUrl().$this->getBaseBotUrlEnd().'/'.$request->getEndpoint();
+        
         return [
             $url,
             $request->getMethod(),
@@ -106,7 +116,12 @@ class DigiSacClient
      */
     public function sendRequest(DigiSacRequest $request)
     {
+ 
         list($url, $method, $headers, $isAsyncRequest) = $this->prepareRequest($request);
+
+        if (!empty($request->getId())) { 
+            $url = $url.'/'.$request->getId();
+        }
 
         $timeOut = $request->getTimeOut();
         $connectTimeOut = $request->getConnectTimeOut();
@@ -116,7 +131,7 @@ class DigiSacClient
         } else {
             $options = ['query' => $request->getParams()];
         }
-
+       
         $rawResponse = $this->httpClientHandler->send($url, $method, $headers, $options, $timeOut, $isAsyncRequest, $connectTimeOut);
 
         $returnResponse = $this->getResponse($request, $rawResponse);

@@ -64,7 +64,7 @@ class DigiSacServiceProvider extends ServiceProvider
     }
 
     /**
-     * Initialize DigiSac Bot SDK Library with Default Config.
+     * Initialize DigiSac SDK Library with Default Config.
      *
      * @param Application $app
      */
@@ -74,16 +74,15 @@ class DigiSacServiceProvider extends ServiceProvider
             $config = $app['config'];
 
             $digisac = new Api(
-                $config->get('telegram.bot_token', false),
-                $config->get('telegram.async_requests', false),
-                $config->get('telegram.http_client_handler', null)
+                $config->get('digisac.url', false),
+                $config->get('digisac.token', false),
+                $config->get('digisac.async_requests', false),
+                $config->get('digisac.http_client_handler', null),
+                $config->get('digisac.headers', null)
             );
 
-            // Register Commands
-            $digisac->addCommands($config->get('telegram.commands', []));
-
             // Check if DI needs to be enabled for Commands
-            if ($config->get('telegram.inject_command_dependencies', false)) {
+            if ($config->get('digisac.inject_command_dependencies', false)) {
                 $digisac->setContainer($app);
             }
 

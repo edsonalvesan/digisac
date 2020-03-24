@@ -11,6 +11,12 @@ use EdsonAlvesan\DigiSac\Exceptions\DigiSacSDKException;
  */
 class DigiSacRequest
 {
+    
+    /**
+     * @var string|null The id endpoint request.
+     */
+    protected $id;
+    
     /**
      * @var string|null The bot access token to use for this request.
      */
@@ -20,6 +26,12 @@ class DigiSacRequest
      * @var string The HTTP method for this request.
      */
     protected $method;
+
+    /**
+     * @var string The url client request.
+    */
+
+    protected $url;
 
     /**
      * @var string The API endpoint for this request.
@@ -80,7 +92,10 @@ class DigiSacRequest
         array $params = [],
         $isAsyncRequest = false,
         $timeOut = 60,
-        $connectTimeOut = 10
+        $connectTimeOut = 10,
+        $headers,
+        $url = null,
+        $id = null
     ) {
         $this->setAccessToken($accessToken);
         $this->setMethod($method);
@@ -89,6 +104,9 @@ class DigiSacRequest
         $this->setAsyncRequest($isAsyncRequest);
         $this->setTimeOut($timeOut);
         $this->setConnectTimeOut($connectTimeOut);
+        $this->setHeaders($headers);
+        $this->setUrl($url);
+        $this->setId($id);
     }
 
     /**
@@ -288,7 +306,7 @@ class DigiSacRequest
     public function getDefaultHeaders()
     {
         return [
-            'User-Agent' => 'DigiSac Bot PHP SDK v'.Api::VERSION.' - (https://github.com/edsonalvesan/digisac)',
+            'User-Agent' => 'DigiSac PHP SDK v'.Api::VERSION.' - (https://github.com/edsonalvesan/digisac)',
         ];
     }
 
@@ -330,5 +348,39 @@ class DigiSacRequest
         $this->connectTimeOut = $connectTimeOut;
 
         return $this;
+    }
+
+    /**
+     * @return this
+     */
+    public function setUrl($url)
+    {
+        $this->url = $url;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getUrl()
+    {
+        return $this->url;
+    }
+
+    /**
+     * @return this
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getId()
+    {
+        return $this->id;
     }
 }

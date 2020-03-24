@@ -3,15 +3,13 @@
 namespace EdsonAlvesan\DigiSac\Objects;
 
 
-class Sticker extends BaseObject
+class Service extends BaseObject
 {
     /**
      * {@inheritdoc}
      */
     public function relations()
     {
-        return [
-            'thumb' => PhotoSize::class,
-        ];
+        return [];
     }
 }
