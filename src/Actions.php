@@ -52,4 +52,15 @@ class Actions
      * @var string
      */
     const RECORD_VIDEO = 'record_video';
+
+    /**
+     * Sets Methods HTTP.
+     *
+     * @var string
+     */
+
+    const GET = 'GET';
+    const POST = 'POST';
+    const PUT = 'PUT';
+    const DELETE = 'DELETE';
 }

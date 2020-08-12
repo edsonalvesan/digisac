@@ -10,17 +10,27 @@ use EdsonAlvesan\DigiSac\HttpClients\HttpClientInterface;
 use EdsonAlvesan\DigiSac\Objects\Message;
 use EdsonAlvesan\DigiSac\Objects\User;
 use EdsonAlvesan\DigiSac\Objects\Service;
+use EdsonAlvesan\DigiSac\Objects\Contact;
 use Illuminate\Support\Str;
+use EdsonAlvesan\DigiSac\Actions;
+use EdsonAlvesan\DigiSac\Traits\ContactTrait;
+use EdsonAlvesan\DigiSac\Traits\FileTrait;
+use EdsonAlvesan\DigiSac\Traits\MessageTrait;
+use EdsonAlvesan\DigiSac\Traits\ServiceTrait;
+use EdsonAlvesan\DigiSac\Traits\UserTrait;
 
 /**
  * Class Api.
  */
 class Api
 {
+    
+    use ContactTrait, FileTrait, MessageTrait, ServiceTrait, UserTrait;
+
     /**
      * @var string Version number of the DigiSac Bot PHP SDK.
      */
-    const VERSION = '1.0.0';
+    const VERSION = '1.0.1';
 
     /**
      * @var string The name of the environment variable that contains the DigiSac API Access Token.
@@ -224,73 +234,7 @@ class Api
     {
         return $this->isAsyncRequest;
     }
-
-
-    /**
-     * A simple method for testing your bot's auth token.
-     * Returns basic information about the bot in form of a User object.
-     *
-     * @return User
-     */
-    public function getMe()
-    {
-        $response = $this->post('getMe');
-
-        return new User($response->getDecodedBody());
-    }
-
-     /**
-     * A simple method for testing service.
-     * Returns basic information Service object.
-     * $ id = '' // Rest
-     * $params = [
-     *  
-     *  ];
-     *
-     * @return Service
-     */
-    public function getService(array $url_token, $id, array $params)
-    {
-        if (!empty($url_token)) {
-            $this->url_token = $url_token; 
-        }
-        
-        $response = $this->get('services', $id, $params);
-
-        return new Service($response->getDecodedBody());
-    }
-
-    /**
-     * Send text messages.
-     *
-     * <code>
-     * $url_token = [
-     *   'url' => '',
-     *   'token' => ''
-     * ]
-     * $params = [
-     *   'text'                     => '',
-     *   'number'                   => '',
-     *   'serviceId'                => '',
-     * ];
-     * </code>
-     *
-     * @return Message
-     */
-    public function sendMessage(array $url_token, array $params)
-    {
-        if (!empty($url_token)) {
-          $this->url_token = $url_token; 
-        }
-
-        $response = $this->post('messages', $params);
-
-
-        return new Message($response->getDecodedBody());
-    }
-
-
-
+    
     /**
      * Sends a GET request to DigiSac API and returns the result.
      *
@@ -331,6 +275,32 @@ class Api
         
         return $this->sendRequest(
             'POST',
+            $endpoint,
+            null,
+            $params
+        );
+    }
+
+    /**
+     * Sends a PUT request to DigiSac API and returns the result.
+     *
+     * @param string $endpoint
+     * @param array  $params
+     * @param bool   $fileUpload Set true if a file is being uploaded.
+     *
+     * @return DigiSacResponse
+     */
+    protected function put($endpoint, array $params = [], $fileUpload = false)
+    {
+        if ($fileUpload) {
+            $params = ['multipart' => $params];
+        } else {
+            $params = ['form_params' => $params];
+        }
+
+        
+        return $this->sendRequest(
+            'PUT',
             $endpoint,
             null,
             $params
