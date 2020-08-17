@@ -8,7 +8,7 @@ trait MessageTrait
 {
 
     
-  public function getService(array $url_token, $id, array $params)
+  public function getMessage(array $url_token, $id, array $params)
     {
         if (!empty($url_token)) {
             $this->url_token = $url_token; 
