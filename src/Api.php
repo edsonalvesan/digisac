@@ -17,7 +17,7 @@ use EdsonAlvesan\DigiSac\Traits\UserTrait;
 use EdsonAlvesan\DigiSac\Traits\BotTrait;
 
 /**
- * Class Api.
+ * Class Api DigiSac.
  */
 class Api
 {
