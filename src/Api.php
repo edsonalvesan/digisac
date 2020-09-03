@@ -21,7 +21,7 @@ use EdsonAlvesan\DigiSac\Traits\UserTrait;
 class Api
 {
     
-    use ContactTrait, FileTrait, MessageTrait, ServiceTrait, UserTrait;
+    use BotTrait, ContactTrait, FileTrait, MessageTrait, ServiceTrait, UserTrait;
 
     /**
      * @var string Version number of the DigiSac Bot PHP SDK.
