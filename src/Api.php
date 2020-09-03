@@ -14,6 +14,7 @@ use EdsonAlvesan\DigiSac\Traits\FileTrait;
 use EdsonAlvesan\DigiSac\Traits\MessageTrait;
 use EdsonAlvesan\DigiSac\Traits\ServiceTrait;
 use EdsonAlvesan\DigiSac\Traits\UserTrait;
+use EdsonAlvesan\DigiSac\Traits\BotTrait;
 
 /**
  * Class Api.
