@@ -18,7 +18,7 @@ trait TagTrait
         return new Tag($response->getDecodedBody());
     }
 
-    public function addTag(array $url_token, $id, array $params)
+    public function addTag(array $url_token, array $params)
     {
         if (!empty($url_token)) {
             $this->url_token = $url_token; 
@@ -35,7 +35,7 @@ trait TagTrait
             $this->url_token = $url_token; 
         }
         
-        $response = $this->put('tags', $params);
+        $response = $this->put('tags/'.$id, $params);
 
         return new Tag($response->getDecodedBody());        
     }

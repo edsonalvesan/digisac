@@ -22,7 +22,7 @@ trait ContactTrait
         return new Contact($response->getDecodedBody());        
     }
 
-    public function addContact(array $url_token, $id, array $params)
+    public function addContact(array $url_token, array $params)
     {
         if (!empty($url_token)) {
             $this->url_token = $url_token; 
@@ -39,7 +39,7 @@ trait ContactTrait
             $this->url_token = $url_token; 
         }
         
-        $response = $this->put('contacts', $params);
+        $response = $this->put('contacts/'.$id, $params);
 
         return new Contact($response->getDecodedBody());        
     }

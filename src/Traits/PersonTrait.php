@@ -18,7 +18,7 @@ trait PersonTrait
         return new Person($response->getDecodedBody());
     }
 
-    public function addPerson(array $url_token, $id, array $params)
+    public function addPerson(array $url_token, array $params)
     {
         if (!empty($url_token)) {
             $this->url_token = $url_token; 
@@ -35,7 +35,7 @@ trait PersonTrait
             $this->url_token = $url_token; 
         }
         
-        $response = $this->put('people', $params);
+        $response = $this->put('people/'.$id, $params);
 
         return new Person($response->getDecodedBody());        
     }

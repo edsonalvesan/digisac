@@ -18,7 +18,7 @@ trait OrganizationTrait
         return new Organization($response->getDecodedBody());
     }
 
-    public function addOrganization(array $url_token, $id, array $params)
+    public function addOrganization(array $url_token, array $params)
     {
         if (!empty($url_token)) {
             $this->url_token = $url_token; 
@@ -35,7 +35,7 @@ trait OrganizationTrait
             $this->url_token = $url_token; 
         }
         
-        $response = $this->put('organizations', $params);
+        $response = $this->put('organizations/'.$id, $params);
 
         return new Organization($response->getDecodedBody());        
     }

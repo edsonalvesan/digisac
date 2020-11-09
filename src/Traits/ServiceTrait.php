@@ -28,7 +28,7 @@ trait ServiceTrait
         return new Service($response->getDecodedBody());
     }
 
-    public function addService(array $url_token, $id, array $params)
+    public function addService(array $url_token, array $params)
     {
         if (!empty($url_token)) {
             $this->url_token = $url_token; 
@@ -45,7 +45,7 @@ trait ServiceTrait
             $this->url_token = $url_token; 
         }
         
-        $response = $this->put('services', $params);
+        $response = $this->put('services/'.$id, $params);
 
         return new Service($response->getDecodedBody());        
     }

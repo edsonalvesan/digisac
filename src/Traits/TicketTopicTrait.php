@@ -18,7 +18,7 @@ trait TicketTopicTrait
         return new TicketTopic($response->getDecodedBody());
     }
 
-    public function addTicketTopic(array $url_token, $id, array $params)
+    public function addTicketTopic(array $url_token, array $params)
     {
         if (!empty($url_token)) {
             $this->url_token = $url_token; 
@@ -35,7 +35,7 @@ trait TicketTopicTrait
             $this->url_token = $url_token; 
         }
         
-        $response = $this->put('ticket-topics', $params);
+        $response = $this->put('ticket-topics/'.$id, $params);
 
         return new TicketTopic($response->getDecodedBody());        
     }

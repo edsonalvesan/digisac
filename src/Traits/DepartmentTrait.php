@@ -18,7 +18,7 @@ trait DepartmentTrait
         return new Department($response->getDecodedBody());
     }
 
-    public function addDepartment(array $url_token, $id, array $params)
+    public function addDepartment(array $url_token, array $params)
     {
         if (!empty($url_token)) {
             $this->url_token = $url_token; 
@@ -35,7 +35,7 @@ trait DepartmentTrait
             $this->url_token = $url_token; 
         }
         
-        $response = $this->put('departments', $params);
+        $response = $this->put('departments/'.$id, $params);
 
         return new Department($response->getDecodedBody());        
     }

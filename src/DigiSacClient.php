@@ -95,7 +95,8 @@ class DigiSacClient
      */
     public function prepareRequest(DigiSacRequest $request)
     {
-        $url = $this->getBaseBotUrlBegin().$request->getUrl().$this->getBaseBotUrlEnd().'/'.$request->getEndpoint();
+        //$url = $this->getBaseBotUrlBegin().$request->getUrl().$this->getBaseBotUrlEnd().'/'.$request->getEndpoint();
+        $url = $request->getUrl().'/'.$request->getEndpoint();
         
         return [
             $url,
