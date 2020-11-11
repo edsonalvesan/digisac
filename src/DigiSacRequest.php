@@ -295,6 +295,10 @@ class DigiSacRequest
             return $this->getParams();
         }
 
+        if ($this->getMethod() === 'PUT') {
+            return $this->getParams();
+        }
+
         return [];
     }
 

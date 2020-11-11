@@ -127,7 +127,7 @@ class DigiSacClient
         $timeOut = $request->getTimeOut();
         $connectTimeOut = $request->getConnectTimeOut();
 
-        if ($method === 'POST') {
+        if (($method === 'POST') || ($method === 'PUT')) {
             $options = $request->getPostParams();
         } else {
             $options = ['query' => $request->getParams()];
