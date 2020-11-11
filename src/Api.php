@@ -9,12 +9,19 @@ use EdsonAlvesan\DigiSac\HttpClients\GuzzleHttpClient;
 use EdsonAlvesan\DigiSac\HttpClients\HttpClientInterface;
 use EdsonAlvesan\DigiSac\Objects\Message;
 use Illuminate\Support\Str;
-use EdsonAlvesan\DigiSac\Traits\ContactTrait;
-use EdsonAlvesan\DigiSac\Traits\FileTrait;
-use EdsonAlvesan\DigiSac\Traits\MessageTrait;
-use EdsonAlvesan\DigiSac\Traits\ServiceTrait;
-use EdsonAlvesan\DigiSac\Traits\UserTrait;
 use EdsonAlvesan\DigiSac\Traits\BotTrait;
+use EdsonAlvesan\DigiSac\Traits\ContactTrait;
+use EdsonAlvesan\DigiSac\Traits\DepartmentTrait;
+use EdsonAlvesan\DigiSac\Traits\FileTrait;
+use EdsonAlvesan\DigiSac\Traits\GroupTrait;
+use EdsonAlvesan\DigiSac\Traits\MessageTrait;
+use EdsonAlvesan\DigiSac\Traits\OrganizationTrait;
+use EdsonAlvesan\DigiSac\Traits\PersonTrait;
+use EdsonAlvesan\DigiSac\Traits\ServiceTrait;
+use EdsonAlvesan\DigiSac\Traits\TagTrait;
+use EdsonAlvesan\DigiSac\Traits\TicketTopicTrait;
+use EdsonAlvesan\DigiSac\Traits\UserTrait;
+
 
 /**
  * Class Api DigiSac.
@@ -22,7 +29,8 @@ use EdsonAlvesan\DigiSac\Traits\BotTrait;
 class Api
 {
     
-    use BotTrait, ContactTrait, FileTrait, MessageTrait, ServiceTrait, UserTrait;
+    use BotTrait, ContactTrait, DepartmentTrait, FileTrait, GroupTrait, MessageTrait, OrganizationTrait, 
+        PersonTrait, ServiceTrait, TagTrait, TicketTopicTrait, UserTrait;
 
     /**
      * @var string Version number of the DigiSac Bot PHP SDK.
